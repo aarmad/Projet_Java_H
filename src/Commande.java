@@ -11,17 +11,21 @@ class Commande {
         this.plats = new ArrayList<>();
         this.total = 0;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/restaurant", "root", "password");
+            // Etablie une connexion avec la BDD
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/restaurant", "root", "1234");
         } catch (SQLException e) {
+            // Message d'errreur au cas où
             e.printStackTrace();
         }
     }
 
+    // Ajoute un plat à la liste des plats
     public void ajouterPlat(Plat plat) {
         plats.add(plat);
         total += plat.getPrix();
     }
 
+    // Affiche les commandes
     public void afficherCommande() {
         System.out.println("Commande :");
         for (Plat plat : plats) {
@@ -30,6 +34,7 @@ class Commande {
         System.out.println("Total : " + total + "€");
     }
 
+    // Enregistrer une commande
     public void enregistrerCommande() {
         try {
             // Insérer la commande et récupérer l'ID généré
